@@ -7,6 +7,9 @@
     "doc": "docs"
   },
   "scripts": {
+    "start": "node build/server.js",
+    "start:dev": "tsx watch src/server.ts",
+    "build": "tsup src --out-dir build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
