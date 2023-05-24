@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  jim-database:
+    image: bitnami/postgresql
+    # volumes:
+    #   - ./data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: gym
