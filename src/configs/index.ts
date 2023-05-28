@@ -6,6 +6,9 @@ const configSchema = z.object({
   NODE_ENV: z
     .enum(['development', 'test', 'production'])
     .default('development'),
+  PRISMA_CLIENT_LOG_LEVEL: z
+    .enum(['info', 'query', 'warn', 'error'])
+    .default('error'),
 })
 
 const _configs = configSchema.safeParse(process.env)
@@ -15,4 +18,13 @@ if (!_configs.success) {
   throw new Error(`Invalid environment variables`)
 }
 
-export const configs = _configs.data
+export const configs = {
+  ..._configs.data,
+  getPrismaClientLogLevel() {
+    if (configs.NODE_ENV === 'production') {
+      return []
+    }
+
+    return [this.PRISMA_CLIENT_LOG_LEVEL]
+  },
+}
