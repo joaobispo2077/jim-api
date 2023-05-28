@@ -1,6 +1,7 @@
 import { hash } from 'bcryptjs'
 import { configs } from '@src/configs'
 import { prisma } from '@src/lib/prisma'
+import { UsersRepository } from '@src/repositories/users-repository'
 
 export type RegisterUseCaseRequest = {
   name: string
@@ -9,7 +10,7 @@ export type RegisterUseCaseRequest = {
 }
 
 export class RegisterUseCase {
-  constructor(private readonly usersRepository: any) {}
+  constructor(private readonly usersRepository: UsersRepository) {}
 
   async execute({ name, email, password }: RegisterUseCaseRequest) {
     const passwordHash = await hash(password, configs.SALT_ROUND)
