@@ -4,7 +4,7 @@ GymPass Checkin style api
 
 ## RFs (Requisitos Funcionais)
 
-- [ ] Deve ser possível se cadastrar
+- [X] Deve ser possível se cadastrar
 - [ ] Deve ser possível se autenticar
 - [ ] Deve ser possível obter o perfil de um usuário logado
 - [ ] Deve ser possível o usuário realizar check-in em uma academia
@@ -17,8 +17,8 @@ GymPass Checkin style api
 
 # RNs (Regras de Negócio)
 
-- [ ] Não deve ser possível cadastrar um usuário com email já existente
-- [ ] O usuário deve poder realizar 2 checkins no mesmo dia
+- [X] Não deve ser possível cadastrar um usuário com email já existente
+- [ ] O usuário não deve poder realizar 2 checkins no mesmo dia
 - [ ] O usuário não pode fazer check-in se não estiver perto (100m) de uma academia
 - [ ] O check-in só pode ser validado até 20 minutos após criado
 - [ ] O check-in só pode ser validado por administradores
@@ -26,7 +26,7 @@ GymPass Checkin style api
 
 ## RNFs (Requisitos Não Funcionais)
 
-- [ ] A senha do usuário precisa ser criptografada
-- [ ] O sdados da aplicação precisam estar persistido em um banco PostgreSQL
+- [X] A senha do usuário precisa ser criptografada
+- [X] O dados da aplicação precisam estar persistido em um banco PostgreSQL
 - [ ] Todas listas de dados precisam estar paginadas com 20 items por página
 - [ ] O usuário deve ser identificado por um JWT (JSON Web Token)
