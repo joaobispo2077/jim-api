@@ -11,7 +11,7 @@ describe('Gym creation Use Case', () => {
     createGymUseCase = new CreateGymUseCase(gymsRepository)
   })
 
-  it('shoud be able to create gym', async () => {
+  it('should be able to create gym', async () => {
     const { gym } = await createGymUseCase.execute({
       title: 'Bravus Fitness 2',
       description:
