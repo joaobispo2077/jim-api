@@ -10,7 +10,7 @@ export type RegisterUseCaseRequest = {
   password: string
 }
 
-export type RegiserUseCaseResponse = {
+export type RegisterUseCaseResponse = {
   user: User
 }
 export class RegisterUseCase {
@@ -20,7 +20,7 @@ export class RegisterUseCase {
     name,
     email,
     password,
-  }: RegisterUseCaseRequest): Promise<RegiserUseCaseResponse> {
+  }: RegisterUseCaseRequest): Promise<RegisterUseCaseResponse> {
     const passwordHash = await hash(password, configs.SALT_ROUND)
 
     const isUserAlreadyExists = await this.usersRepository.findByEmail(email)
