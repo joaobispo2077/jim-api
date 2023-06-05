@@ -3,6 +3,9 @@ import { InMemoryCheckInsRepository } from '@src/repositories/in-memory/in-memor
 import { CheckInUseCase } from './check-in'
 import { randomUUID } from 'node:crypto'
 import { InMemoryGymsRepository } from '@src/repositories/in-memory/in-memory-gyms-repository'
+import { MaxDistanceError } from './errors/max-distance-error'
+import { MaxNumberOfCheckInsError } from './errors/max-number-of-check-ins-error'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 let checkInsRepository: InMemoryCheckInsRepository
 let gymsRepository: InMemoryGymsRepository
@@ -74,7 +77,7 @@ describe('Check-in Use Case', () => {
         userLatitude: -23.5065763,
         userLongitude: -46.7572729,
       }),
-    ).rejects.toBeInstanceOf(Error)
+    ).rejects.toBeInstanceOf(MaxNumberOfCheckInsError)
   })
 
   it('shoud be able to check in twice but in the different days', async () => {
@@ -120,6 +123,6 @@ describe('Check-in Use Case', () => {
         userLatitude: -23.4685011,
         userLongitude: -46.5754483,
       }),
-    ).rejects.toBeInstanceOf(Error)
+    ).rejects.toBeInstanceOf(MaxDistanceError)
   })
 })
