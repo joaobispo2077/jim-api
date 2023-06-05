@@ -15,7 +15,7 @@ describe('Check-in Use Case', () => {
     checkInUseCase = new CheckInUseCase(checkInsRepository, gymsRepository)
 
     await gymsRepository.create({
-      name: 'Academia 1',
+      title: 'Academia 1',
       phone: '123456789',
       description: 'Academia 1',
       latitude: -23.5063308,
@@ -91,7 +91,7 @@ describe('Check-in Use Case', () => {
 
   it('shoud not be able to check in on distant gym', async () => {
     await gymsRepository.create({
-      name: 'Academia 2',
+      title: 'Academia 2',
       phone: '123456789',
       description: 'Academia 2',
       latitude: -23.5807332,
