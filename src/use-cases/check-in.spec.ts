@@ -41,6 +41,19 @@ describe('Check-in Use Case', () => {
     expect(checkIn.id).toEqual(expect.any(String))
   })
 
+  it('shoud not be able to check in on a non exists gym', async () => {
+    vi.setSystemTime(new Date(2023, 0, 20, 8, 0, 0))
+
+    await expect(
+      checkInUseCase.execute({
+        userId: randomUUID(),
+        gymId: randomUUID(),
+        userLatitude: -23.5065763,
+        userLongitude: -46.7572729,
+      }),
+    ).rejects.toBeInstanceOf(ResourceNotFoundError)
+  })
+
   it('shoud not be able to check in twice in the same day', async () => {
     vi.setSystemTime(new Date(2023, 0, 20, 8, 0, 0))
 
