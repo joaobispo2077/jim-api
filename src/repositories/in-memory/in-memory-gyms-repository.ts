@@ -15,9 +15,9 @@ export class InMemoryGymsRepository implements GymsRepository {
       id: randomUUID(),
       created_at: new Date(),
       description: data.description ?? null,
-      latitude: new Decimal(data.latitude as number),
-      longitude: new Decimal(data.longitude as number),
-      name: data.name,
+      latitude: new Decimal(data.latitude.toString()),
+      longitude: new Decimal(data.longitude.toString()),
+      title: data.title,
       phone: data.phone ?? null,
       updated_at: new Date(),
     }
