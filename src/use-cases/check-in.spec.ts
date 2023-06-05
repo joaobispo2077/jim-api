@@ -2,11 +2,10 @@ import { describe, expect, it, beforeEach, vi, afterEach } from 'vitest'
 import { InMemoryCheckInsRepository } from '@src/repositories/in-memory/in-memory-users-check-ins.repository'
 import { CheckInUseCase } from './check-in'
 import { randomUUID } from 'node:crypto'
-import { GymsRepository } from '@src/repositories/gyms-repository'
 import { InMemoryGymsRepository } from '@src/repositories/in-memory/in-memory-gyms-repository'
 
 let checkInsRepository: InMemoryCheckInsRepository
-let gymsRepository: GymsRepository
+let gymsRepository: InMemoryGymsRepository
 let checkInUseCase: CheckInUseCase
 
 describe('Check-in Use Case', () => {
@@ -19,8 +18,8 @@ describe('Check-in Use Case', () => {
       name: 'Academia 1',
       phone: '123456789',
       description: 'Academia 1',
-      latitude: 0,
-      longitude: 0,
+      latitude: -23.5063308,
+      longitude: -46.757538,
     })
     vi.useFakeTimers()
   })
@@ -34,9 +33,9 @@ describe('Check-in Use Case', () => {
 
     const { checkIn } = await checkInUseCase.execute({
       userId: randomUUID(),
-      gymId: randomUUID(),
-      userLatitude: 0,
-      userLongitude: 0,
+      gymId: gymsRepository.gyms[0].id,
+      userLatitude: -23.5065763,
+      userLongitude: -46.7572729,
     })
 
     expect(checkIn.id).toEqual(expect.any(String))
@@ -46,21 +45,21 @@ describe('Check-in Use Case', () => {
     vi.setSystemTime(new Date(2023, 0, 20, 8, 0, 0))
 
     const userId = randomUUID()
-    const gymId = randomUUID()
+    const gymId = gymsRepository.gyms[0].id
 
     await checkInUseCase.execute({
       userId,
       gymId,
-      userLatitude: 0,
-      userLongitude: 0,
+      userLatitude: -23.5065763,
+      userLongitude: -46.7572729,
     })
 
     await expect(
       checkInUseCase.execute({
         userId,
         gymId,
-        userLatitude: 0,
-        userLongitude: 0,
+        userLatitude: -23.5065763,
+        userLongitude: -46.7572729,
       }),
     ).rejects.toBeInstanceOf(Error)
   })
@@ -69,13 +68,13 @@ describe('Check-in Use Case', () => {
     vi.setSystemTime(new Date(2023, 0, 20, 8, 0, 0))
 
     const userId = randomUUID()
-    const gymId = randomUUID()
+    const gymId = gymsRepository.gyms[0].id
 
     await checkInUseCase.execute({
       userId,
       gymId,
-      userLatitude: 0,
-      userLongitude: 0,
+      userLatitude: -23.5065763,
+      userLongitude: -46.7572729,
     })
 
     vi.setSystemTime(new Date(2023, 0, 21, 8, 0, 0))
@@ -83,10 +82,31 @@ describe('Check-in Use Case', () => {
     const { checkIn } = await checkInUseCase.execute({
       userId,
       gymId,
-      userLatitude: 0,
-      userLongitude: 0,
+      userLatitude: -23.5065763,
+      userLongitude: -46.7572729,
     })
 
     expect(checkIn.created_at).toEqual(expect.any(Date))
+  })
+
+  it('shoud not be able to check in on distant gym', async () => {
+    await gymsRepository.create({
+      name: 'Academia 2',
+      phone: '123456789',
+      description: 'Academia 2',
+      latitude: -23.5807332,
+      longitude: -46.6499799,
+    })
+
+    vi.setSystemTime(new Date(2023, 0, 20, 8, 0, 0))
+
+    await expect(
+      checkInUseCase.execute({
+        userId: randomUUID(),
+        gymId: gymsRepository.gyms[1].id,
+        userLatitude: -23.4685011,
+        userLongitude: -46.5754483,
+      }),
+    ).rejects.toBeInstanceOf(Error)
   })
 })
