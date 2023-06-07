@@ -31,7 +31,7 @@ describe('Check-in Use Case', () => {
     vi.useRealTimers()
   })
 
-  it('shoud be able to check in', async () => {
+  it('should be able to check in', async () => {
     vi.setSystemTime(new Date(2023, 0, 20, 8, 0, 0))
 
     const { checkIn } = await checkInUseCase.execute({
@@ -44,7 +44,7 @@ describe('Check-in Use Case', () => {
     expect(checkIn.id).toEqual(expect.any(String))
   })
 
-  it('shoud not be able to check in on a non exists gym', async () => {
+  it('should not be able to check in on a non exists gym', async () => {
     vi.setSystemTime(new Date(2023, 0, 20, 8, 0, 0))
 
     await expect(
@@ -57,7 +57,7 @@ describe('Check-in Use Case', () => {
     ).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
 
-  it('shoud not be able to check in twice in the same day', async () => {
+  it('should not be able to check in twice in the same day', async () => {
     vi.setSystemTime(new Date(2023, 0, 20, 8, 0, 0))
 
     const userId = randomUUID()
@@ -80,7 +80,7 @@ describe('Check-in Use Case', () => {
     ).rejects.toBeInstanceOf(MaxNumberOfCheckInsError)
   })
 
-  it('shoud be able to check in twice but in the different days', async () => {
+  it('should be able to check in twice but in the different days', async () => {
     vi.setSystemTime(new Date(2023, 0, 20, 8, 0, 0))
 
     const userId = randomUUID()
@@ -105,7 +105,7 @@ describe('Check-in Use Case', () => {
     expect(checkIn.created_at).toEqual(expect.any(Date))
   })
 
-  it('shoud not be able to check in on distant gym', async () => {
+  it('should not be able to check in on distant gym', async () => {
     await gymsRepository.create({
       title: 'Academia 2',
       phone: '123456789',
