@@ -8,11 +8,11 @@ GymPass Checkin style api
 - [X] Deve ser possível se autenticar
 - [X] Deve ser possível obter o perfil de um usuário logado
 - [X] Deve ser possível o usuário realizar check-in em uma academia
-- [ ] Deve ser possível validar o checkin de um usuário
-- [] Deve ser possível obter o número de checkins de um usuário logado
+- [X] Deve ser possível validar o checkin de um usuário
+- [X] Deve ser possível obter o número de checkins de um usuário logado
 - [X] Deve ser possível o usuário visualizar o histórico de checkins
-- [ ] Deve ser possível o usuário buscar academias próximas
-- [ ] Deve ser possível buscar academias pelo nome
+- [X] Deve ser possível o usuário buscar academias próximas (1OKm)
+- [X] Deve ser possível buscar academias pelo nome
 - [X] Deve ser possível cadastrar uma academia
 
 # RNs (Regras de Negócio)
