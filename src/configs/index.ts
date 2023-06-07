@@ -10,6 +10,9 @@ const configSchema = z.object({
   PRISMA_CLIENT_LOG_LEVEL: z
     .enum(['info', 'query', 'warn', 'error'])
     .default('error'),
+  DEFAULT_PER_PAGE: z.coerce.number().default(20),
+  DEFAULT_PAGE: z.coerce.number().default(1),
+  DEFAULT_MAX_NEARBY_DISTANCE: z.coerce.number().default(10),
 })
 
 const _configs = configSchema.safeParse(process.env)
