@@ -1,7 +1,11 @@
 import { FastifyInstance } from 'fastify'
 import request from 'supertest'
 
-export async function generateE2EUserToken(app: FastifyInstance) {
+export type GenerateE2EUserTokenResponse = { token: string }
+
+export async function generateE2EUserToken(
+  app: FastifyInstance,
+): Promise<GenerateE2EUserTokenResponse> {
   const server = request(app.server)
 
   const name = 'John Doe'
@@ -19,5 +23,5 @@ export async function generateE2EUserToken(app: FastifyInstance) {
     password,
   })
 
-  return { token: body.token }
+  return { token: body.token } as GenerateE2EUserTokenResponse
 }
