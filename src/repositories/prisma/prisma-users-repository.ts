@@ -1,6 +1,6 @@
 import { Prisma, User } from '@prisma/client'
 import { prisma } from '@src/lib/prisma'
-import { UsersRepository } from './users-repository'
+import { UsersRepository } from '../users-repository'
 
 export class PrismaUsersRepository implements UsersRepository {
   async findById(id: string): Promise<User | null> {
@@ -12,13 +12,13 @@ export class PrismaUsersRepository implements UsersRepository {
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    const isUserAlreadyExists = await prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: {
         email,
       },
     })
 
-    return isUserAlreadyExists
+    return user
   }
 
   async create(data: Prisma.UserCreateInput) {
