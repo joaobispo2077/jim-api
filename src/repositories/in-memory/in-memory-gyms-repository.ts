@@ -30,7 +30,7 @@ export class InMemoryGymsRepository implements GymsRepository {
         coordinates,
       )
 
-      return distance <= configs.DEFAULT_MAX_NEARBY_DISTANCE
+      return distance <= configs.DEFAULT_MAX_NEARBY_DISTANCE_IN_KM
     })
   }
 
