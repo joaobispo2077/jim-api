@@ -20,7 +20,7 @@ GymPass Checkin style api
 - [X] Não deve ser possível cadastrar um usuário com email já existente
 - [X] O usuário não deve poder realizar 2 checkins no mesmo dia
 - [X] O usuário não pode fazer check-in se não estiver perto (100m) de uma academia
-- [ ] O check-in só pode ser validado até 20 minutos após criado
+- [X] O check-in só pode ser validado até 20 minutos após criado
 - [ ] O check-in só pode ser validado por administradores
 - [ ] A academia só pode ser cadastrada por administradores
 

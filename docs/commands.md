@@ -85,3 +85,15 @@ at root
 ```bash
 npm link vitest-environment-prism
 ```
+
+```bash
+npm i -D npm-run-all
+```
+
+```bash
+npm i supertest -D
+```
+
+```bash
+npm i --save-dev @types/supertest
+```
