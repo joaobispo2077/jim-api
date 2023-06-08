@@ -2,6 +2,7 @@ import { Prisma, CheckIn } from '@prisma/client'
 import { CheckInsRepository } from '../check-ins-repository'
 import { randomUUID } from 'node:crypto'
 import dayjs from 'dayjs'
+import { configs } from '@src/configs'
 
 export class InMemoryCheckInsRepository implements CheckInsRepository {
   public readonly checkins: CheckIn[] = []
@@ -46,7 +47,10 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
   async findManyByUserId(userId: string, page: number): Promise<CheckIn[]> {
     return this.checkins
       .filter((checkIn) => checkIn.user_id === userId)
-      .slice((page - 1) * 20, page * 20)
+      .slice(
+        (page - 1) * configs.DEFAULT_PER_PAGE,
+        page * configs.DEFAULT_PER_PAGE,
+      )
   }
 
   async countByUserId(userId: string): Promise<number> {
