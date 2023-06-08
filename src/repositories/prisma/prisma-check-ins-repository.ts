@@ -3,6 +3,7 @@ import { prisma } from '@src/lib/prisma'
 import { CheckInsRepository } from '../check-ins-repository'
 import { configs } from '@src/configs'
 import dayjs from 'dayjs'
+import { getPaginationOffsetFromPage } from '@src/utils/get-pagination-offset-from-page'
 
 export class PrismaCheckInsRepository implements CheckInsRepository {
   async findById(id: string): Promise<CheckIn | null> {
@@ -28,7 +29,7 @@ export class PrismaCheckInsRepository implements CheckInsRepository {
       where: {
         user_id: userId,
       },
-      skip: (page - 1) * configs.DEFAULT_PER_PAGE,
+      skip: getPaginationOffsetFromPage(page),
       take: configs.DEFAULT_PER_PAGE,
     })
 

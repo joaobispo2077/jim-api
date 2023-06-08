@@ -4,6 +4,7 @@ import { GymsRepository } from '../gyms-repository'
 import { Coordinate } from '@src/utils/get-distance-between-coordinates'
 import { prisma } from '@src/lib/prisma'
 import { configs } from '@src/configs'
+import { getPaginationOffsetFromPage } from '@src/utils/get-pagination-offset-from-page'
 
 export class PrismaGymsRepository implements GymsRepository {
   async findManyNearby({ latitude, longitude }: Coordinate): Promise<Gym[]> {
@@ -21,7 +22,7 @@ export class PrismaGymsRepository implements GymsRepository {
         },
       },
       take: configs.DEFAULT_PER_PAGE,
-      skip: (page - 1) * configs.DEFAULT_PER_PAGE,
+      skip: getPaginationOffsetFromPage(page),
     })
   }
 
