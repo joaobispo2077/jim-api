@@ -2,6 +2,7 @@ import 'dotenv/config'
 import { z } from 'zod'
 
 const configSchema = z.object({
+  JWT_SECRET: z.string(),
   SALT_ROUND: z.coerce.number().default(6),
   PORT: z.coerce.number().default(3333),
   NODE_ENV: z
