@@ -69,3 +69,19 @@ npm i @vitest/coverage-c8 -D
 ```bash
 npm i @vitest/ui -D
 ```
+
+```bash
+npm i @fastify/jwt
+```
+
+
+at prisma/vitest-environment-prisma
+```bash
+npm link
+```
+
+at root
+
+```bash
+npm link vitest-environment-prism
+```
