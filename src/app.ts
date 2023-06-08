@@ -1,5 +1,5 @@
 import fastify from 'fastify'
-import { setupRoutes } from './http/routes'
+import { setupRoutes } from './http/controllers/users/routes'
 import { ZodError } from 'zod'
 import { configs } from './configs'
 import fastifyJwt from '@fastify/jwt'
