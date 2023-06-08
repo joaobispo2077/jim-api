@@ -4,6 +4,7 @@ import { randomUUID } from 'node:crypto'
 import { InMemoryGymsRepository } from '@src/repositories/in-memory/in-memory-gyms-repository'
 import { ValidateCheckInUseCase } from './validate-check-in'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { LateCheckInError } from './errors/late-check-in-error'
 
 let checkInsRepository: InMemoryCheckInsRepository
 let gymsRepository: InMemoryGymsRepository
@@ -66,6 +67,6 @@ describe('Validate check-in Use Case', () => {
       validateCheckInUseCase.execute({
         checkInId: createdCheckIn.id,
       }),
-    ).rejects.toBeInstanceOf(Error)
+    ).rejects.toBeInstanceOf(LateCheckInError)
   })
 })
