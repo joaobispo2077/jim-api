@@ -3,7 +3,7 @@ import request from 'supertest'
 import { app } from '@src/app'
 import { generateE2EUserToken } from '@src/utils/test/generate-e2e-user-token'
 
-describe('Search gym (e2e)', () => {
+describe('Find nearby gyms (e2e)', () => {
   beforeAll(async () => {
     await app.ready()
   })
@@ -12,7 +12,7 @@ describe('Search gym (e2e)', () => {
     app.close()
   })
 
-  it('should be able to search gyms by title', async () => {
+  it('should be able to find nearby gyms by latitude & longitude', async () => {
     const { token } = await generateE2EUserToken(app)
     await request(app.server)
       .post('/gyms')
@@ -37,34 +37,21 @@ describe('Search gym (e2e)', () => {
         longitude: -46.6499799,
       })
 
-    await request(app.server)
-      .post('/gyms')
-      .set('Authorization', `Bearer ${token}`)
-      .send({
-        title: 'Academia 1',
-        phone: '123456789',
-        description: 'Academia 1',
+    const response = await request(app.server)
+      .get('/gyms/nearby')
+      .query({
         latitude: -23.5063308,
         longitude: -46.757538,
-      })
-
-    const response = await request(app.server)
-      .get('/gyms/search')
-      .query({
-        query: 'Academia',
       })
       .set('Authorization', `Bearer ${token}`)
       .send()
 
     expect(response.status).toBe(200)
-    expect(response.body.gyms).toHaveLength(2)
+    expect(response.body.gyms).toHaveLength(1)
     expect(response.body.gyms).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          title: 'Academia 1',
-        }),
-        expect.objectContaining({
-          title: 'Academia 2',
+          title: 'Bravus Fitness 2',
         }),
       ]),
     )
