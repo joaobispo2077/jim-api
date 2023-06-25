@@ -1,3 +1,4 @@
+import { configs } from '@src/configs'
 import { InvalidCredentialsError } from '@src/use-cases/errors/invalid-credentials-error'
 import { makeAuthenticateUseCase } from '@src/use-cases/factories/make-authenticate-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
@@ -31,9 +32,26 @@ export async function authenticate(
       },
     )
 
-    return reply.status(200).send({
-      token,
-    })
+    const refreshToken = await reply.jwtSign(
+      {},
+      {
+        sign: {
+          sub: user.id,
+        },
+      },
+    )
+
+    return reply
+      .setCookie(configs.COOKIE_REFRESH_TOKEN_NAME, refreshToken, {
+        path: '/',
+        secure: true,
+        sameSite: true,
+        httpOnly: true,
+      })
+      .status(200)
+      .send({
+        token,
+      })
   } catch (error: any) {
     if (error instanceof InvalidCredentialsError) {
       return reply.status(401).send({ message: error.message })

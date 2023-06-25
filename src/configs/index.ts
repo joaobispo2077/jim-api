@@ -3,6 +3,9 @@ import { z } from 'zod'
 
 const configSchema = z.object({
   JWT_SECRET: z.string(),
+  JWT_EXPIRES_IN: z.string().default('10m'),
+  COOKIE_REFRESH_TOKEN_NAME: z.string().default('refresh_token@jim-api'),
+  JWT_REFRESH_TOKEN_EXPIRES_IN: z.string().default('7d'),
   SALT_ROUND: z.coerce.number().default(6),
   PORT: z.coerce.number().default(3333),
   NODE_ENV: z
