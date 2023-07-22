@@ -3,11 +3,14 @@ import { register } from './register'
 import { authenticate } from './authenticate'
 import { profile } from './profile'
 import { verifyJWT } from '@src/http/middlewares/verify-jwt'
+import { refresh } from './refresh'
 
 export async function setupUsersRoutes(app: FastifyInstance) {
   app.post('/users', register)
 
   app.post('/sessions', authenticate)
+
+  app.patch('/tokens', refresh)
 
   app.get('/me', { onRequest: [verifyJWT] }, profile)
 }
