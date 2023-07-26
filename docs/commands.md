@@ -97,3 +97,8 @@ npm i supertest -D
 ```bash
 npm i --save-dev @types/supertest
 ```
+
+Após alterar o schema.prisma, executar o comando abaixo para alterar o banco
+```bash
+npx prisma migrate dev
+```
