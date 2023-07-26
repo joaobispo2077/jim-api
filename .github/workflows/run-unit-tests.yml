@@ -1,4 +1,4 @@
-name: Unit tests
+name: Run unit tests
 
 on: [push]
 
@@ -13,5 +13,5 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
-      - run: npm install
-      - run: npm run test
+      - run: npm ci
+      - run: npm test
