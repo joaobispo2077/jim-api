@@ -29,7 +29,9 @@ export class ValidateCheckInUseCase {
     )
 
     const isCheckInTooOld = distanceInMinutesFromCheckInCreation > 20
-
+    console.error('@@@@@@@@')
+    console.error(isCheckInTooOld)
+    console.error(distanceInMinutesFromCheckInCreation)
     if (isCheckInTooOld) {
       throw new LateCheckInError()
     }

@@ -13,7 +13,9 @@ describe('Find nearby gyms (e2e)', () => {
   })
 
   it('should be able to find nearby gyms by latitude & longitude', async () => {
-    const { token } = await generateE2EUserToken(app)
+    const { token } = await generateE2EUserToken(app, {
+      role: 'ADMIN',
+    })
     await request(app.server)
       .post('/gyms')
       .set('Authorization', `Bearer ${token}`)

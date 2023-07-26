@@ -13,7 +13,9 @@ describe('Create check-in (e2e)', () => {
   })
 
   it('should be able to create a check-in', async () => {
-    const { token } = await generateE2EUserToken(app)
+    const { token } = await generateE2EUserToken(app, {
+      role: 'ADMIN',
+    })
 
     await request(app.server)
       .post('/gyms')

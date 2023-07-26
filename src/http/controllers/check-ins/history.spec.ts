@@ -13,7 +13,9 @@ describe('Check-in history (e2e)', () => {
   })
 
   it('should be able to list the history of check-ins', async () => {
-    const { token } = await generateE2EUserToken(app)
+    const { token } = await generateE2EUserToken(app, {
+      role: 'ADMIN',
+    })
 
     await request(app.server)
       .post('/gyms')

@@ -3,17 +3,21 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 export async function validate(request: FastifyRequest, reply: FastifyReply) {
-  const validateCheckInParamsSchema = z.object({
-    checkInId: z.string().uuid(),
-  })
+  try {
+    const validateCheckInParamsSchema = z.object({
+      checkInId: z.string().uuid(),
+    })
 
-  const { checkInId } = validateCheckInParamsSchema.parse(request.params)
+    const { checkInId } = validateCheckInParamsSchema.parse(request.params)
 
-  const validateCheckInUseCase = makeValidateCheckInUseCase()
+    const validateCheckInUseCase = makeValidateCheckInUseCase()
 
-  await validateCheckInUseCase.execute({
-    checkInId,
-  })
+    await validateCheckInUseCase.execute({
+      checkInId,
+    })
 
-  return reply.status(204).send()
+    return reply.status(204).send()
+  } catch (error) {
+    console.error(error)
+  }
 }

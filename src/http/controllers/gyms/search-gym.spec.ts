@@ -13,7 +13,9 @@ describe('Search gym (e2e)', () => {
   })
 
   it('should be able to search gyms by title', async () => {
-    const { token } = await generateE2EUserToken(app)
+    const { token } = await generateE2EUserToken(app, {
+      role: 'ADMIN',
+    })
     await request(app.server)
       .post('/gyms')
       .set('Authorization', `Bearer ${token}`)

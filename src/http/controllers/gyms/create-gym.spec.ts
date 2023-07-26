@@ -13,7 +13,9 @@ describe('Create gym (e2e)', () => {
   })
 
   it('should be able to create a gym', async () => {
-    const { token } = await generateE2EUserToken(app)
+    const { token } = await generateE2EUserToken(app, {
+      role: 'ADMIN',
+    })
     const response = await request(app.server)
       .post('/gyms')
       .set('Authorization', `Bearer ${token}`)
