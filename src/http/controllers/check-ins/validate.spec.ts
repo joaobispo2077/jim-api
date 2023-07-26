@@ -1,4 +1,13 @@
-import { afterAll, beforeAll, describe, expect, it } from 'vitest'
+import {
+  afterAll,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  vi,
+  beforeEach,
+  afterEach,
+} from 'vitest'
 import request from 'supertest'
 import { app } from '@src/app'
 import { generateE2EUserToken } from '@src/utils/test/generate-e2e-user-token'
@@ -12,8 +21,19 @@ describe('Check-in validation (e2e)', () => {
     app.close()
   })
 
+  beforeEach(() => {
+    vi.useFakeTimers()
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   it('should be able to validate check-in', async () => {
-    const { token } = await generateE2EUserToken(app)
+    vi.setSystemTime(new Date(2023, 0, 1, 13, 40))
+    const { token } = await generateE2EUserToken(app, {
+      role: 'ADMIN',
+    })
 
     await request(app.server)
       .post('/gyms')
@@ -26,8 +46,8 @@ describe('Check-in validation (e2e)', () => {
         latitude: -23.5040702,
         longitude: -46.78697,
       })
-
-    const responseSearchGyms = await request(app.server)
+    const server = request(app.server)
+    const responseSearchGyms = await server
       .get('/gyms/search')
       .query({
         query: 'Bravus',
@@ -37,7 +57,7 @@ describe('Check-in validation (e2e)', () => {
 
     const { id } = responseSearchGyms.body.gyms[0]
 
-    await request(app.server)
+    await server
       .post(`/gyms/${id}/check-ins`)
       .set('Authorization', `Bearer ${token}`)
       .send({
@@ -45,19 +65,21 @@ describe('Check-in validation (e2e)', () => {
         longitude: -46.78697,
       })
 
-    const responseCheckInsHistory = await request(app.server)
+    const responseCheckInsHistory = await server
       .get('/check-ins/history')
       .set('Authorization', `Bearer ${token}`)
       .send()
 
     const checkInId = responseCheckInsHistory.body.checkIns[0]?.id
 
-    const response = await request(app.server)
+    vi.setSystemTime(new Date(2023, 0, 1, 13, 45))
+
+    const response = await server
       .patch(`/check-ins/${checkInId}/validate`)
       .set('Authorization', `Bearer ${token}`)
       .send()
 
-    const responseCheckInsHistoryToBeValidated = await request(app.server)
+    const responseCheckInsHistoryToBeValidated = await server
       .get('/check-ins/history')
       .set('Authorization', `Bearer ${token}`)
       .send()
