@@ -21,12 +21,12 @@ GymPass Checkin style api
 - [X] O usuário não deve poder realizar 2 checkins no mesmo dia
 - [X] O usuário não pode fazer check-in se não estiver perto (100m) de uma academia
 - [X] O check-in só pode ser validado até 20 minutos após criado
-- [ ] O check-in só pode ser validado por administradores
-- [ ] A academia só pode ser cadastrada por administradores
+- [X] O check-in só pode ser validado por administradores
+- [X] A academia só pode ser cadastrada por administradores
 
 ## RNFs (Requisitos Não Funcionais)
 
 - [X] A senha do usuário precisa ser criptografada
 - [X] O dados da aplicação precisam estar persistido em um banco PostgreSQL
 - [X] Todas listas de dados precisam estar paginadas com 20 items por página
-- [ ] O usuário deve ser identificado por um JWT (JSON Web Token)
+- [X] O usuário deve ser identificado por um JWT (JSON Web Token)
