@@ -21,8 +21,9 @@ GymPass Checkin style api
 - [X] O usuário não deve poder realizar 2 checkins no mesmo dia
 - [X] O usuário não pode fazer check-in se não estiver perto (100m) de uma academia
 - [X] O check-in só pode ser validado até 20 minutos após criado
-- [ ] O check-in só pode ser validado por administradores
-- [ ] A academia só pode ser cadastrada por administradores
+- [X] O check-in só pode ser validado por administradores
+- [X] A academia só pode ser cadastrada por administradores
+- [] Somente um Admin pode cadastrar outro Admin
 
 ## RNFs (Requisitos Não Funcionais)
 
