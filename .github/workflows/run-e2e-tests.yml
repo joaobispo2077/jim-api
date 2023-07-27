@@ -1,0 +1,31 @@
+name: Run E2E tests
+
+on: [pull_request]
+
+jobs:
+  run-unit-tests:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+
+    services:
+      jim-database:
+        image: bitnami/postgresql
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: docker
+          POSTGRES_PASSWORD: docker
+          POSTGRES_DB: gym
+
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run test:e2e
+        env:
+          JWT_SECRET: test-environment
+          DATABASE_URL: "postgresql://docker:docker@localhost:5432/gym?schema=public"
