@@ -23,11 +23,10 @@ GymPass Checkin style api
 - [X] O check-in só pode ser validado até 20 minutos após criado
 - [X] O check-in só pode ser validado por administradores
 - [X] A academia só pode ser cadastrada por administradores
-- [] Somente um Admin pode cadastrar outro Admin
 
 ## RNFs (Requisitos Não Funcionais)
 
 - [X] A senha do usuário precisa ser criptografada
 - [X] O dados da aplicação precisam estar persistido em um banco PostgreSQL
 - [X] Todas listas de dados precisam estar paginadas com 20 items por página
-- [ ] O usuário deve ser identificado por um JWT (JSON Web Token)
+- [X] O usuário deve ser identificado por um JWT (JSON Web Token)
