@@ -6,6 +6,12 @@
   "directories": {
     "doc": "docs"
   },
+  "keywords": ["gymspass", "jim-api", "nodejs", "typescript"],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "start": "node build/server.js",
     "start:dev": "tsx watch src/server.ts",
@@ -26,9 +32,6 @@
     "db:migrate": "npx prisma migrate deploy",
     "db:studio": "npx prisma studio"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@fastify/cookie": "8.3.0",
     "@fastify/jwt": "7.0.0",
