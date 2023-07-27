@@ -13,17 +13,16 @@ import pkg from '../package.json'
 export const app = fastify()
 
 const swaggerOptions: SwaggerOptions = {
-  openapi: {
+  swagger: {
     info: {
       title: pkg.name,
       description: pkg.description,
       version: pkg.version,
     },
-    servers: [
-      {
-        url: configs.SWAGGER_HOST,
-      },
-    ],
+    host: configs.SWAGGER_HOST,
+    schemes: ['http', 'https'],
+    consumes: ['application/json'],
+    produces: ['application/json'],
     tags: [{ name: 'Default', description: 'Default' }],
   },
 }
