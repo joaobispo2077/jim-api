@@ -6,8 +6,34 @@ import { ZodError } from 'zod'
 import { configs } from './configs'
 import fastifyJwt from '@fastify/jwt'
 import fastifyCookie from '@fastify/cookie'
+import fastifySwagger, { SwaggerOptions } from '@fastify/swagger'
+import fastifySwaggerUi, { FastifySwaggerUiOptions } from '@fastify/swagger-ui'
+import pkg from '../package.json'
 
 export const app = fastify()
+
+const swaggerOptions: SwaggerOptions = {
+  openapi: {
+    info: {
+      title: pkg.name,
+      description: pkg.description,
+      version: pkg.version,
+    },
+    servers: [
+      {
+        url: configs.SWAGGER_HOST,
+      },
+    ],
+    tags: [{ name: 'Default', description: 'Default' }],
+  },
+}
+
+const swaggerUiOptions: FastifySwaggerUiOptions = {
+  routePrefix: '/docs',
+}
+
+app.register(fastifySwagger, swaggerOptions)
+app.register(fastifySwaggerUi, swaggerUiOptions)
 
 app.register(fastifyJwt, {
   secret: configs.JWT_SECRET,

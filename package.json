@@ -6,7 +6,12 @@
   "directories": {
     "doc": "docs"
   },
-  "keywords": ["gymspass", "jim-api", "nodejs", "typescript"],
+  "keywords": [
+    "gymspass",
+    "jim-api",
+    "nodejs",
+    "typescript"
+  ],
   "author": "",
   "license": "ISC",
   "engines": {
@@ -35,6 +40,8 @@
   "dependencies": {
     "@fastify/cookie": "8.3.0",
     "@fastify/jwt": "7.0.0",
+    "@fastify/swagger": "8.8.0",
+    "@fastify/swagger-ui": "1.9.3",
     "@prisma/client": "4.14.1",
     "bcryptjs": "2.4.3",
     "dayjs": "1.11.8",

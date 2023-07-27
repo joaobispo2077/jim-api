@@ -2,6 +2,7 @@ import 'dotenv/config'
 import { z } from 'zod'
 
 const configSchema = z.object({
+  SWAGGER_HOST: z.string().default('localhost:3333'),
   JWT_SECRET: z.string(),
   JWT_EXPIRES_IN: z.string().default('10m'),
   COOKIE_REFRESH_TOKEN_NAME: z.string().default('refresh_token@jim-api'),
